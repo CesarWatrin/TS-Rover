@@ -1,15 +1,19 @@
-import { Orientation } from "@/enums/orientation.enum";
+import { Orientation } from './enums/orientation.enum';
+import { Planet } from './planet';
 
-class Rover {
+export class Rover {
   orientation: Orientation;
   position: { x: number; y: number };
+  planet: Planet;
 
   constructor(
     position: { x: number; y: number } = { x: 0, y: 0 },
-    orientation: Orientation = Orientation.NORTH
+    orientation: Orientation = Orientation.NORTH,
+    planet: Planet
   ) {
     this.orientation = orientation;
     this.position = position;
+    this.planet = planet;
   }
 
   moveForward(): void {
@@ -36,6 +40,7 @@ class Rover {
     }
   }
   moveBackward(): void {
+    console.log(this.orientation);
     switch (this.orientation) {
       case Orientation.NORTH: {
         this.position.y -= 1;
