@@ -31,11 +31,11 @@ export class Rover {
       }
     }
     switch (this.position.x) {
-      case this.planet.size: {
+      case this.planet.size + 1: {
         this.position.x = -this.planet.size;
         break;
       }
-      case -this.planet.size: {
+      case -this.planet.size - 1: {
         this.position.x = this.planet.size;
         break;
       }
@@ -43,6 +43,7 @@ export class Rover {
         break;
       }
     }
+    console.log(this.position, this.orientation);
   }
 
   moveForward(): void {
@@ -70,7 +71,6 @@ export class Rover {
     this.checkPosition();
   }
   moveBackward(): void {
-    console.log(this.orientation);
     switch (this.orientation) {
       case Orientation.NORTH: {
         this.position.y -= 1;
@@ -93,7 +93,6 @@ export class Rover {
       }
     }
     this.checkPosition();
-    console.log(this.position);
   }
   turnRight(): void {
     switch (this.orientation) {
