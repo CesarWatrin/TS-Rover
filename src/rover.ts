@@ -1,3 +1,5 @@
+import { Orientation } from "./enums/orientation.enum";
+
 class Rover {
   orientation: Orientation;
   position: { x: number; y: number };
@@ -10,7 +12,7 @@ class Rover {
     this.position = position;
   }
 
-  moveForward() {
+  moveForward(): void {
     switch (this.orientation) {
       case Orientation.NORTH: {
         this.position.y += 1;
@@ -33,7 +35,7 @@ class Rover {
       }
     }
   }
-  moveBackward() {
+  moveBackward(): void {
     switch (this.orientation) {
       case Orientation.NORTH: {
         this.position.y -= 1;
@@ -56,7 +58,7 @@ class Rover {
       }
     }
   }
-  turnRight() {
+  turnRight(): void {
     switch (this.orientation) {
       case Orientation.NORTH: {
         this.orientation = Orientation.EAST;
@@ -79,7 +81,7 @@ class Rover {
       }
     }
   }
-  turnLeft() {
+  turnLeft(): void {
     switch (this.orientation) {
       case Orientation.NORTH: {
         this.orientation = Orientation.WEST;
@@ -102,11 +104,4 @@ class Rover {
       }
     }
   }
-}
-
-enum Orientation {
-  NORTH = 'N',
-  EAST = 'E',
-  WEST = 'W',
-  SOUTH = 'S',
 }
