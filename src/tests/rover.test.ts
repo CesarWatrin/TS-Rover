@@ -1,53 +1,52 @@
-import {afterEach, beforeEach, describe, expect, it} from 'vitest';
+import { beforeEach, describe, expect, it} from 'vitest';
 import { Rover } from "../rover";
 import { Planet } from "../planet";
 import { Position } from "../position";
 import { Orientation } from "../enums/orientation.enum";
 
-const INITIAL_POSITION = new Position(0, 0);
 const PLANET = new Planet(10);
+let initialPosition = new Position(0, 0);
+let rover = new Rover(initialPosition, Orientation.NORTH, PLANET);
 
 describe('rover', () => {
+    
+    beforeEach(() => {
+        rover = new Rover(initialPosition, Orientation.NORTH, PLANET);
+        initialPosition = new Position(0, 0);
+    });
 
     it('should move forward', function () {
-        const ROVER = new Rover(INITIAL_POSITION, Orientation.NORTH, PLANET);
-        ROVER.moveForward();
-        expect(ROVER.getPosition()).toEqual({ x: 0, y: 1});
+        rover.moveForward();
+        expect(rover.getPosition()).toEqual({ x: 0, y: 1});
     });
 
     it('should move backward', function () {
-        const ROVER = new Rover(INITIAL_POSITION, Orientation.NORTH, PLANET);
-        ROVER.moveBackward();
-        expect(ROVER.getPosition()).toEqual({ x: 0, y: -1});
+        rover.moveBackward();
+        expect(rover.getPosition()).toEqual({ x: 0, y: -1});
     });
 
     it('should turn right', function () {
-        const ROVER = new Rover(INITIAL_POSITION, Orientation.NORTH, PLANET);
-        ROVER.turnRight();
-        expect(ROVER.getOrientation()).toEqual(Orientation.EAST);
+        rover.turnRight();
+        expect(rover.getOrientation()).toEqual(Orientation.EAST);
     });
 
     it('should turn left', function () {
-        const ROVER = new Rover(INITIAL_POSITION, Orientation.NORTH, PLANET);
-        ROVER.turnLeft();
-        expect(ROVER.getOrientation()).toEqual(Orientation.WEST);
+        rover.turnLeft();
+        expect(rover.getOrientation()).toEqual(Orientation.WEST);
     });
 
     it('should check position', function () {
-        const ROVER = new Rover(INITIAL_POSITION, Orientation.NORTH, PLANET);
-        ROVER.checkPosition();
-        expect(ROVER.getPosition()).toEqual({ x: 0, y: 0});
+        rover.checkPosition();
+        expect(rover.getPosition()).toEqual({ x: 0, y: 0});
     });
 
     it('should set orientation', function () {
-        const ROVER = new Rover(INITIAL_POSITION, Orientation.NORTH, PLANET);
-        ROVER.setOrientation(Orientation.SOUTH);
-        expect(ROVER.getOrientation()).toEqual(Orientation.SOUTH);
+        rover.setOrientation(Orientation.SOUTH);
+        expect(rover.getOrientation()).toEqual(Orientation.SOUTH);
     });
 
     it('should set position', function () {
-        const ROVER = new Rover(INITIAL_POSITION, Orientation.NORTH, PLANET);
-        ROVER.setPosition(new Position(2, 1));
-        expect(ROVER.getPosition()).toEqual({ x: 2, y: 1});
+        rover.setPosition(new Position(2, 1));
+        expect(rover.getPosition()).toEqual({ x: 2, y: 1});
     });
 });
