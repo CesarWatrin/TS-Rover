@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "launch": "npx ts-node src/index.ts"
+    "launch": "npx ts-node index.ts"
   },
   "dependencies": {
     "enquirer": "^2.3.6"

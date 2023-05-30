@@ -68,7 +68,6 @@ export class Rover {
         break;
       }
     }
-    this.checkPosition();
   }
   moveBackward(): void {
     switch (this.orientation) {
@@ -92,7 +91,6 @@ export class Rover {
         break;
       }
     }
-    this.checkPosition();
   }
   turnRight(): void {
     switch (this.orientation) {
