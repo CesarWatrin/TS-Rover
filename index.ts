@@ -5,15 +5,16 @@ import { Rover } from './src/rover';
 import { prompt } from 'enquirer';
 
 (async function main() {
-  const planet = new Planet(10);
-  const rover = new Rover({ x: 0, y: -9 }, Orientation.NORTH, planet);
+  const PLANET = new Planet(10);
+  const INITIAL_POSITION = { x: 0, y: 0 };
+  const ROVER = new Rover(INITIAL_POSITION, Orientation.NORTH, PLANET);
   let isRunning = true;
 
   console.log('Bienvenue sur Mars !')
-  console.log('Votre position initiale est :', rover.position);
+  console.log('Votre position initiale est :', INITIAL_POSITION);
 
   while (isRunning) {
-    const response = await prompt<{ value: string }>({
+    const RESPONSE = await prompt<{ value: Event }>({
       name: 'value',
       message: 'Que faire ?',
       type: 'select',
@@ -26,24 +27,24 @@ import { prompt } from 'enquirer';
       ],
     });
 
-    switch (response.value) {
+    switch (RESPONSE.value) {
       case Event.MOVE_FORWARD:
-        rover.moveForward();
+        ROVER.moveForward();
         break;
       case Event.MOVE_BACKWARD:
-        rover.moveBackward();
+        ROVER.moveBackward();
         break;
       case Event.TURN_RIGHT:
-        rover.turnRight();
+        ROVER.turnRight();
         break;
       case Event.TURN_LEFT:
-        rover.turnLeft();
+        ROVER.turnLeft();
         break;
       default:
         isRunning = false;
         break;
     }
 
-    rover.checkPosition();
+    ROVER.checkPosition();
   }
 })();
