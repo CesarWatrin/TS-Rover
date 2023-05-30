@@ -1,5 +1,8 @@
 {
-  "devDependencies": {
-    "typescript": "^5.0.4"
+  "scripts": {
+    "launch": "npx ts-node index.ts"
+  },
+  "dependencies": {
+    "enquirer": "^2.3.6"
   }
 }

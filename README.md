@@ -1,6 +1,7 @@
 # TS-Rover
 
-## Compiler le projet
+## Lancer le projet
+
 ```bash
-npx tsc
+npm run launch
 ```
