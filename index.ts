@@ -3,10 +3,11 @@ import { Event } from './src/enums/event.enum';
 import { Planet } from './src/planet';
 import { Rover } from './src/rover';
 import { prompt } from 'enquirer';
+import { Position } from "./src/position";
 
 (async function main() {
   const PLANET = new Planet(10);
-  const INITIAL_POSITION = { x: 0, y: 0 };
+  const INITIAL_POSITION = new Position(0, 0);
   const ROVER = new Rover(INITIAL_POSITION, Orientation.NORTH, PLANET);
   let isRunning = true;
 

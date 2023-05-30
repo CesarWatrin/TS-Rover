@@ -1,13 +1,14 @@
 import { Orientation } from './enums/orientation.enum';
 import { Planet } from './planet';
+import { Position } from "./position";
 
 export class Rover {
-  orientation: Orientation;
-  position: { x: number; y: number };
-  planet: Planet;
+  private orientation: Orientation;
+  private position: Position;
+  private planet: Planet;
 
   constructor(
-    position: { x: number; y: number } = { x: 0, y: 0 },
+    position: Position,
     orientation: Orientation = Orientation.NORTH,
     planet: Planet
   ) {
@@ -16,27 +17,43 @@ export class Rover {
     this.planet = planet;
   }
 
+  setOrientation(orientation: Orientation): void {
+    this.orientation = orientation;
+  }
+
+  getOrientation(): Orientation {
+    return this.orientation;
+  }
+
+  setPosition(position: Position): void {
+    this.position = position;
+  }
+
+  getPosition(): Position {
+    return this.position;
+  }
+
   checkPosition(): void {
-    switch (this.position.y) {
-      case this.planet.size + 1: {
-        this.position.y = -this.planet.size;
+    switch (this.position.getY()) {
+      case this.planet.getSize() + 1: {
+        this.position.setY(-this.planet.getSize());
         break;
       }
-      case -this.planet.size - 1: {
-        this.position.y = this.planet.size;
+      case -this.planet.getSize() - 1: {
+        this.position.setY(this.planet.getSize());
         break;
       }
       default: {
         break;
       }
     }
-    switch (this.position.x) {
-      case this.planet.size + 1: {
-        this.position.x = -this.planet.size;
+    switch (this.position.getX()) {
+      case this.planet.getSize() + 1: {
+        this.position.setX(-this.planet.getSize());
         break;
       }
-      case -this.planet.size - 1: {
-        this.position.x = this.planet.size;
+      case -this.planet.getSize() - 1: {
+        this.position.setX(this.planet.getSize());
         break;
       }
       default: {
@@ -49,19 +66,19 @@ export class Rover {
   moveForward(): void {
     switch (this.orientation) {
       case Orientation.NORTH: {
-        this.position.y += 1;
+        this.position.setY(this.position.getY() + 1);
         break;
       }
       case Orientation.EAST: {
-        this.position.x += 1;
+        this.position.setX(this.position.getX() + 1);
         break;
       }
       case Orientation.SOUTH: {
-        this.position.y -= 1;
+        this.position.setY(this.position.getY() - 1);
         break;
       }
       case Orientation.WEST: {
-        this.position.x -= 1;
+        this.position.setX(this.position.getX() - 1);
         break;
       }
       default: {
@@ -72,19 +89,19 @@ export class Rover {
   moveBackward(): void {
     switch (this.orientation) {
       case Orientation.NORTH: {
-        this.position.y -= 1;
+        this.position.setY(this.position.getY() - 1);
         break;
       }
       case Orientation.EAST: {
-        this.position.x -= 1;
+        this.position.setX(this.position.getX() - 1);
         break;
       }
       case Orientation.SOUTH: {
-        this.position.y += 1;
+        this.position.setY(this.position.getY() + 1);
         break;
       }
       case Orientation.WEST: {
-        this.position.x += 1;
+        this.position.setX(this.position.getX() + 1);
         break;
       }
       default: {

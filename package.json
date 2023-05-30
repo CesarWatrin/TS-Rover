@@ -1,8 +1,12 @@
 {
   "scripts": {
-    "launch": "npx ts-node index.ts"
+    "launch": "npx ts-node index.ts",
+    "test": "npx vitest"
   },
   "dependencies": {
     "enquirer": "^2.3.6"
+  },
+  "devDependencies": {
+    "vitest": "^0.31.2"
   }
 }
