@@ -1,5 +1,5 @@
+"use strict";
 const world = 'world';
-
-function hello(who: string = world): string {
+function hello(who = world) {
     return `Hello ${who}!`;
 }
