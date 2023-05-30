@@ -1,4 +1,4 @@
-import { Orientation } from "./enums/orientation.enum";
+import { Orientation } from "@/enums/orientation.enum";
 
 class Rover {
   orientation: Orientation;
