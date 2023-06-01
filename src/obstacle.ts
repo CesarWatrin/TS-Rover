@@ -1,14 +1,16 @@
-import { Planet } from './planet';
 import { Position } from './position';
 
 export class Obstacle {
-  private position: Position;
 
-  constructor(position: Position) {
-    this.position = position;
-  }
+  constructor(
+    private readonly position: Position
+  ) {}
 
   getPosition(): Position {
     return this.position;
+  }
+
+  toString(): string {
+    return `Obstacle à la position: ${this.position.toString()}`;
   }
 }

@@ -34,10 +34,6 @@ export class Rover {
     return this.position;
   }
 
-  warnObstacle(obstacle: Obstacle) {
-    console.log('OBSTACLE RENCONTRE A LA POSITION', obstacle.getPosition());
-  }
-
   checkPosition(obstacle: Obstacle): void {
     const obstacleY = obstacle.getPosition().getY();
     const obstacleX = obstacle.getPosition().getX();
@@ -45,7 +41,7 @@ export class Rover {
       this.position.getY() === obstacleY &&
       this.position.getX() === obstacleX
     ) {
-      this.warnObstacle(obstacle);
+      obstacle.toString();
     }
 
     switch (this.position.getY()) {
