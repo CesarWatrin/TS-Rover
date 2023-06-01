@@ -58,6 +58,8 @@ describe('rover', () => {
 
     it('should cross the map on x', function () {
         rover.setPosition(new Position(10, 0));
+        rover.turnRight();
+
         rover.moveForward();
         expect(rover.getPosition()).toEqual({ x: -10, y: 0});
     });

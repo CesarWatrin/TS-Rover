@@ -48,32 +48,6 @@ export class Rover {
   }
 
   checkPosition() {
-    switch (this.position.getY()) {
-      case this.planet.getSize() + 1: {
-        this.position.setY(-this.planet.getSize());
-        break;
-      }
-      case -this.planet.getSize() - 1: {
-        this.position.setY(this.planet.getSize());
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-    switch (this.position.getX()) {
-      case this.planet.getSize() + 1: {
-        this.position.setX(-this.planet.getSize());
-        break;
-      }
-      case -this.planet.getSize() - 1: {
-        this.position.setX(this.planet.getSize());
-        break;
-      }
-      default: {
-        break;
-      }
-    }
     console.log(this.position, this.orientation);
     return true;
   }
@@ -81,19 +55,35 @@ export class Rover {
   moveForward(): void {
     switch (this.orientation) {
       case Orientation.NORTH: {
-        this.position.setY(this.position.getY() + 1);
+        if (this.position.getY() == this.planet.getSize()) {
+          this.position.setY(-this.planet.getSize());
+        } else {
+          this.position.setY(this.position.getY() + 1);
+        }
         break;
       }
       case Orientation.EAST: {
-        this.position.setX(this.position.getX() + 1);
+        if (this.position.getX() == this.planet.getSize()) {
+          this.position.setX(-this.planet.getSize());
+        } else {
+          this.position.setX(this.position.getX() + 1);
+        }
         break;
       }
       case Orientation.SOUTH: {
-        this.position.setY(this.position.getY() - 1);
+        if (this.position.getY() == -this.planet.getSize()) {
+          this.position.setY(this.planet.getSize());
+        } else {
+          this.position.setY(this.position.getY() - 1);
+        }
         break;
       }
       case Orientation.WEST: {
-        this.position.setX(this.position.getX() - 1);
+        if (this.position.getX() == -this.planet.getSize()) {
+          this.position.setX(this.planet.getSize());
+        } else {
+          this.position.setX(this.position.getX() - 1);
+        }
         break;
       }
       default: {
