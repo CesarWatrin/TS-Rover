@@ -51,7 +51,9 @@ export class Rover {
     console.log(this.position, this.orientation);
   }
 
-  moveForward(): void {
+  moveForward(obstacle?: Obstacle): void {
+    const init_position_y = this.position.getY();
+    const init_position_x = this.position.getX();
     switch (this.orientation) {
       case Orientation.NORTH: {
         if (this.position.getY() == this.planet.getSize()) {
@@ -89,8 +91,14 @@ export class Rover {
         break;
       }
     }
+    if (obstacle && this.checkObstacle(obstacle)) {
+      this.position.setX(init_position_x);
+      this.position.setY(init_position_y);
+    }
   }
-  moveBackward(): void {
+  moveBackward(obstacle?: Obstacle): void {
+    const init_position_y = this.position.getY();
+    const init_position_x = this.position.getX();
     switch (this.orientation) {
       case Orientation.NORTH: {
         if (this.position.getY() == -this.planet.getSize()) {
@@ -127,6 +135,10 @@ export class Rover {
       default: {
         break;
       }
+    }
+    if (obstacle && this.checkObstacle(obstacle)) {
+      this.position.setX(init_position_x);
+      this.position.setY(init_position_y);
     }
   }
   turnRight(): void {

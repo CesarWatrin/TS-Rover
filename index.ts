@@ -108,16 +108,10 @@ import { Position } from './src/position';
     } else {
       switch (RESPONSE.value) {
         case Event.MOVE_FORWARD:
-          ROVER.moveForward();
-          if (ROVER.checkObstacle(OBSTACLE)) {
-            ROVER.moveBackward();
-          }
+          ROVER.moveForward(OBSTACLE);
           break;
         case Event.MOVE_BACKWARD:
-          ROVER.moveBackward();
-          if (ROVER.checkObstacle(OBSTACLE)) {
-            ROVER.moveForward();
-          }
+          ROVER.moveBackward(OBSTACLE);
           break;
         case Event.TURN_RIGHT:
           ROVER.turnRight();

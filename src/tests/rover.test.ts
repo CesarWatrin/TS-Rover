@@ -1,11 +1,14 @@
 import { beforeEach, describe, expect, it} from 'vitest';
 import { Rover } from "../rover";
 import { Planet } from "../planet";
+import { Obstacle } from "../obstacle";
 import { Position } from "../position";
 import { Orientation } from "../enums/orientation.enum";
 
 const PLANET = new Planet(10);
 let initialPosition = new Position(0, 0);
+let obstaclePosition = new Position(1, 5);
+let obstacle = new Obstacle(obstaclePosition);
 let rover = new Rover(initialPosition, Orientation.NORTH, PLANET);
 
 describe('rover', () => {
@@ -13,6 +16,9 @@ describe('rover', () => {
     beforeEach(() => {
         rover = new Rover(initialPosition, Orientation.NORTH, PLANET);
         initialPosition = new Position(0, 0);
+        obstaclePosition = new Position(1, 5);
+        obstacle = new Obstacle(obstaclePosition);
+
     });
 
     it('should move forward', function () {
@@ -62,5 +68,17 @@ describe('rover', () => {
 
         rover.moveForward();
         expect(rover.getPosition()).toEqual({ x: -10, y: 0});
+    });
+
+    it('should stop at obstacle', function () {
+        rover.setPosition(new Position(1, 0));
+        rover.moveForward(obstacle);
+        rover.moveForward(obstacle);
+        rover.moveForward(obstacle);
+        rover.moveForward(obstacle);
+        rover.moveForward(obstacle);
+        rover.moveForward(obstacle);
+        console.log(rover.getPosition())
+        expect(rover.getPosition()).toEqual({ x: 1, y: 4});
     });
 });
