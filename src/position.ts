@@ -16,7 +16,7 @@ export class Position {
   }
 
   decrementX(): Position {
-    if (this.x < 0) {
+    if (this.x === 0) {
       return new Position(this.planet.getSize(), this.y, this.planet);
     }
     return new Position(this.x - 1, this.y, this.planet);
@@ -30,7 +30,7 @@ export class Position {
   }
 
   decrementY(): Position {
-    if (this.y < 0) {
+    if (this.y === 0) {
       return new Position(this.x, this.planet.getSize(), this.planet);
     }
     return new Position(this.x, this.y - 1, this.planet);
