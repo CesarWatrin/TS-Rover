@@ -1,57 +1,42 @@
 import { Planet } from "./planet";
 
 export class Position {
-  private x: number;
-  private y: number;
 
-  constructor(x: number = 0, y: number = 0) {
-    this.x = x;
-    this.y = y;
+  constructor(
+    private readonly x: number,
+    private readonly y: number,
+    private readonly planet: Planet
+  ) {}
+
+  incrementX(): Position {
+    if (this.x > this.planet.getSize()) {
+      return new Position(0, this.y, this.planet);
+    }
+    return new Position(this.x + 1, this.y, this.planet);
   }
 
-  setX(x: number): void {
-    this.x = x;
+  decrementX(): Position {
+    if (this.x < 0) {
+      return new Position(this.planet.getSize(), this.y, this.planet);
+    }
+    return new Position(this.x - 1, this.y, this.planet);
   }
 
-  getX(): number {
-    return this.x;
+  incrementY(): Position {
+    if (this.y > this.planet.getSize()) {
+      return new Position(this.x, 0, this.planet);
+    }
+    return new Position(this.x, this.y + 1, this.planet);
   }
 
-  setY(y: number): void {
-    this.y = y;
+  decrementY(): Position {
+    if (this.y < 0) {
+      return new Position(this.x, this.planet.getSize(), this.planet);
+    }
+    return new Position(this.x, this.y - 1, this.planet);
   }
 
-  getY(): number {
-    return this.y;
-  }
-
-  checkPosition(size: number, planet: Planet): void {
-      switch (this.y) {
-          case planet.getSize() + 1: {
-              this.y = -planet.getSize();
-              break;
-          }
-          case -planet.getSize() - 1: {
-              this.y = planet.getSize();
-              break;
-          }
-          default: {
-              break;
-          }
-      }
-      switch (this.x) {
-          case planet.getSize() + 1: {
-              this.x = -planet.getSize();
-              break;
-          }
-          case -planet.getSize() - 1: {
-              this.x = planet.getSize();
-              break;
-          }
-          default: {
-              break;
-          }
-      }
-      console.log(this.x, this.y)
+  toString(): string {
+    return `${this.x}:${this.y}`;
   }
 }

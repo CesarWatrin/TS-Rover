@@ -1,158 +1,55 @@
-import { Orientation } from './enums/orientation.enum';
-import { Planet } from './planet';
+import { Orientation } from './orientation';
 import { Position } from "./position";
 
 export class Rover {
-  private orientation: Orientation;
-  private position: Position;
-  private planet: Planet;
 
   constructor(
-    position: Position,
-    orientation: Orientation = Orientation.NORTH,
-    planet: Planet
-  ) {
-    this.orientation = orientation;
-    this.position = position;
-    this.planet = planet;
+    private orientation: Orientation,
+    private position: Position,
+  ) {}
+
+  turnLeft(): void {
+    this.orientation = this.orientation.turnLeft();
   }
 
-  setOrientation(orientation: Orientation): void {
-    this.orientation = orientation;
-  }
-
-  getOrientation(): Orientation {
-    return this.orientation;
-  }
-
-  setPosition(position: Position): void {
-    this.position = position;
-  }
-
-  getPosition(): Position {
-    return this.position;
-  }
-
-  checkPosition(): void {
-    switch (this.position.getY()) {
-      case this.planet.getSize() + 1: {
-        this.position.setY(-this.planet.getSize());
-        break;
-      }
-      case -this.planet.getSize() - 1: {
-        this.position.setY(this.planet.getSize());
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-    switch (this.position.getX()) {
-      case this.planet.getSize() + 1: {
-        this.position.setX(-this.planet.getSize());
-        break;
-      }
-      case -this.planet.getSize() - 1: {
-        this.position.setX(this.planet.getSize());
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-    console.log(this.position, this.orientation);
+  turnRight(): void {
+    this.orientation = this.orientation.turnRight();
   }
 
   moveForward(): void {
     switch (this.orientation) {
-      case Orientation.NORTH: {
-        this.position.setY(this.position.getY() + 1);
+      case Orientation.NORTH:
+        this.position = this.position.incrementY();
         break;
-      }
-      case Orientation.EAST: {
-        this.position.setX(this.position.getX() + 1);
+      case Orientation.EAST:
+        this.position = this.position.incrementX()
         break;
-      }
-      case Orientation.SOUTH: {
-        this.position.setY(this.position.getY() - 1);
+      case Orientation.SOUTH:
+        this.position = this.position.decrementY();
         break;
-      }
-      case Orientation.WEST: {
-        this.position.setX(this.position.getX() - 1);
-        break;
-      }
-      default: {
-        break;
-      }
+      default:
+        this.position = this.position.decrementX();
+        break
     }
   }
   moveBackward(): void {
     switch (this.orientation) {
-      case Orientation.NORTH: {
-        this.position.setY(this.position.getY() - 1);
+      case Orientation.NORTH:
+        this.position = this.position.decrementY();
         break;
-      }
-      case Orientation.EAST: {
-        this.position.setX(this.position.getX() - 1);
+      case Orientation.EAST:
+        this.position = this.position.decrementX()
         break;
-      }
-      case Orientation.SOUTH: {
-        this.position.setY(this.position.getY() + 1);
+      case Orientation.SOUTH:
+        this.position = this.position.incrementY();
         break;
-      }
-      case Orientation.WEST: {
-        this.position.setX(this.position.getX() + 1);
-        break;
-      }
-      default: {
-        break;
-      }
+      default:
+        this.position = this.position.incrementX();
+        break
     }
   }
-  turnRight(): void {
-    switch (this.orientation) {
-      case Orientation.NORTH: {
-        this.orientation = Orientation.EAST;
-        break;
-      }
-      case Orientation.EAST: {
-        this.orientation = Orientation.SOUTH;
-        break;
-      }
-      case Orientation.SOUTH: {
-        this.orientation = Orientation.WEST;
-        break;
-      }
-      case Orientation.WEST: {
-        this.orientation = Orientation.NORTH;
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-  }
-  turnLeft(): void {
-    switch (this.orientation) {
-      case Orientation.NORTH: {
-        this.orientation = Orientation.WEST;
-        break;
-      }
-      case Orientation.EAST: {
-        this.orientation = Orientation.NORTH;
-        break;
-      }
-      case Orientation.SOUTH: {
-        this.orientation = Orientation.EAST;
-        break;
-      }
-      case Orientation.WEST: {
-        this.orientation = Orientation.SOUTH;
-        break;
-      }
-      default: {
-        break;
-      }
-    }
+
+  toString(): string {
+    return `${this.position.toString()} - ${this.orientation.toString()}`;
   }
 }
