@@ -1,12 +1,9 @@
 import { Orientation } from './orientation';
-import { Position } from "./position";
+import { Position } from './position';
+import { Obstacle } from './obstacle';
 
 export class Rover {
-
-  constructor(
-    private orientation: Orientation,
-    private position: Position,
-  ) {}
+  constructor(private orientation: Orientation, private position: Position) {}
 
   public turnLeft(): void {
     this.orientation = this.orientation.turnLeft();
@@ -22,14 +19,14 @@ export class Rover {
         this.position = this.position.incrementY();
         break;
       case Orientation.EAST.toString():
-        this.position = this.position.incrementX()
+        this.position = this.position.incrementX();
         break;
       case Orientation.SOUTH.toString():
         this.position = this.position.decrementY();
         break;
       default:
         this.position = this.position.decrementX();
-        break
+        break;
     }
   }
   public moveBackward(): void {
@@ -38,14 +35,14 @@ export class Rover {
         this.position = this.position.decrementY();
         break;
       case Orientation.EAST.toString():
-        this.position = this.position.decrementX()
+        this.position = this.position.decrementX();
         break;
       case Orientation.SOUTH.toString():
         this.position = this.position.incrementY();
         break;
       default:
         this.position = this.position.incrementX();
-        break
+        break;
     }
   }
 

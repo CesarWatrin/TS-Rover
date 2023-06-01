@@ -4,8 +4,10 @@ import {Position} from "../position";
 import {Orientation} from "../orientation";
 import {OrientationEnum} from "../enums/orientation.enum";
 import {Rover} from "../rover";
+import { Obstacle } from '../obstacle';
 
 const PLANET = new Planet(5);
+
 let initialPosition = new Position(0, 0, PLANET);
 let initialOrientation = new Orientation(OrientationEnum.NORTH);
 let rover = new Rover(initialOrientation, initialPosition);
@@ -63,4 +65,48 @@ describe('rover', () => {
         rover.moveBackward();
         expect(rover.toString()).toBe('5:0 - E');
     });
+
+    it('should stop on obstacle forward on x', function () {
+        let obstaclePosition = new Position(3, 0, PLANET);
+        let obstacle = new Obstacle(obstaclePosition);
+        PLANET.setObstacle(obstacle);
+        rover.turnRight();
+        for (let i = 0; i < 4; i++) {
+            rover.moveForward();
+        }
+        expect(rover.toString()).toBe('2:0 - E');
+    });
+
+    it('should stop on obstacle backward on x', function () {
+        let obstaclePosition = new Position(3, 0, PLANET);
+        let obstacle = new Obstacle(obstaclePosition);
+        PLANET.setObstacle(obstacle);
+        rover.turnRight();
+        for (let i = 0; i < 8; i++) {
+            rover.moveBackward();
+        }
+        expect(rover.toString()).toBe('4:0 - E');
+    });
+
+    it('should stop on obstacle forward on y', function () {
+        let obstaclePosition = new Position(0, 3, PLANET);
+        let obstacle = new Obstacle(obstaclePosition);
+        PLANET.setObstacle(obstacle);
+        for (let i = 0; i < 7; i++) {
+            rover.moveForward();
+        }
+        expect(rover.toString()).toBe('0:2 - N');
+    });
+
+    it('should stop on obstacle backward on y', function () {
+        let obstaclePosition = new Position(0, 3, PLANET);
+        let obstacle = new Obstacle(obstaclePosition);
+        PLANET.setObstacle(obstacle);
+        for (let i = 0; i < 17; i++) {
+            rover.moveBackward();
+        }
+        expect(rover.toString()).toBe('0:4 - N');
+    });
+
+    
 });

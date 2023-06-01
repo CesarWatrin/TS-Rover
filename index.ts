@@ -1,10 +1,8 @@
 import { OrientationEnum } from './src/enums/orientation.enum';
-import { Orientation } from "./src/orientation";
-import { Event } from './src/enums/event.enum';
+import { Orientation } from './src/orientation';
 import { Planet } from './src/planet';
 import { Rover } from './src/rover';
-import { prompt } from 'enquirer';
-import { Position } from "./src/position";
+import { Position } from './src/position';
 
 (async function main() {
   const PLANET = new Planet(5);
