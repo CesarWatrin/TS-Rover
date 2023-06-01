@@ -2,16 +2,19 @@ import { Orientation } from './src/enums/orientation.enum';
 import { Event } from './src/enums/event.enum';
 import { Planet } from './src/planet';
 import { Rover } from './src/rover';
+import { Obstacle } from './src/obstacle';
 import { prompt } from 'enquirer';
-import { Position } from "./src/position";
+import { Position } from './src/position';
 
 (async function main() {
   const PLANET = new Planet(10);
   const INITIAL_POSITION = new Position(0, 0);
+  const OBSTACLE_POSITION = new Position(5, 0);
+  const OBSTACLE = new Obstacle(OBSTACLE_POSITION);
   const ROVER = new Rover(INITIAL_POSITION, Orientation.NORTH, PLANET);
   let isRunning = true;
 
-  console.log('Bienvenue sur Mars !')
+  console.log('Bienvenue sur Mars !');
   console.log('Votre position initiale est :', INITIAL_POSITION);
 
   while (isRunning) {
@@ -46,6 +49,6 @@ import { Position } from "./src/position";
         break;
     }
 
-    ROVER.checkPosition();
+    ROVER.checkPosition(OBSTACLE);
   }
 })();

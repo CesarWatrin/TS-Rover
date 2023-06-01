@@ -1,6 +1,7 @@
 import { Orientation } from './enums/orientation.enum';
+import { Obstacle } from './obstacle';
 import { Planet } from './planet';
-import { Position } from "./position";
+import { Position } from './position';
 
 export class Rover {
   private orientation: Orientation;
@@ -33,7 +34,20 @@ export class Rover {
     return this.position;
   }
 
-  checkPosition(): void {
+  warnObstacle(obstacle: Obstacle) {
+    console.log('OBSTACLE RENCONTRE A LA POSITION', obstacle.getPosition());
+  }
+
+  checkPosition(obstacle: Obstacle): void {
+    const obstacleY = obstacle.getPosition().getY();
+    const obstacleX = obstacle.getPosition().getX();
+    if (
+      this.position.getY() === obstacleY &&
+      this.position.getX() === obstacleX
+    ) {
+      this.warnObstacle(obstacle);
+    }
+
     switch (this.position.getY()) {
       case this.planet.getSize() + 1: {
         this.position.setY(-this.planet.getSize());
