@@ -94,19 +94,35 @@ export class Rover {
   moveBackward(): void {
     switch (this.orientation) {
       case Orientation.NORTH: {
-        this.position.setY(this.position.getY() - 1);
+        if (this.position.getY() == -this.planet.getSize()) {
+          this.position.setY(this.planet.getSize());
+        } else {
+          this.position.setY(this.position.getY() - 1);
+        }
         break;
       }
       case Orientation.EAST: {
-        this.position.setX(this.position.getX() - 1);
+        if (this.position.getX() == -this.planet.getSize()) {
+          this.position.setX(this.planet.getSize());
+        } else {
+          this.position.setX(this.position.getX() - 1);
+        }
         break;
       }
       case Orientation.SOUTH: {
-        this.position.setY(this.position.getY() + 1);
+        if (this.position.getY() == this.planet.getSize()) {
+          this.position.setY(-this.planet.getSize());
+        } else {
+          this.position.setY(this.position.getY() + 1);
+        }
         break;
       }
       case Orientation.WEST: {
-        this.position.setX(this.position.getX() + 1);
+        if (this.position.getX() == this.planet.getSize()) {
+          this.position.setX(-this.planet.getSize());
+        } else {
+          this.position.setX(this.position.getX() + 1);
+        }
         break;
       }
       default: {
