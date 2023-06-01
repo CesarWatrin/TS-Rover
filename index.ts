@@ -99,9 +99,15 @@ import { Position } from './src/position';
       switch (RESPONSE.value) {
         case Event.MOVE_FORWARD:
           ROVER.moveForward();
+          if (ROVER.checkObstacle(OBSTACLE)) {
+            ROVER.moveBackward();
+          }
           break;
         case Event.MOVE_BACKWARD:
           ROVER.moveBackward();
+          if (ROVER.checkObstacle(OBSTACLE)) {
+            ROVER.moveForward();
+          }
           break;
         case Event.TURN_RIGHT:
           ROVER.turnRight();
@@ -114,7 +120,6 @@ import { Position } from './src/position';
           break;
       }
     }
-    ROVER.checkObstacle(OBSTACLE);
     ROVER.checkPosition();
   }
 })();
