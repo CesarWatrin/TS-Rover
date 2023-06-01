@@ -49,7 +49,6 @@ export class Rover {
 
   checkPosition() {
     console.log(this.position, this.orientation);
-    return true;
   }
 
   moveForward(): void {

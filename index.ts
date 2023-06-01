@@ -9,7 +9,7 @@ import { Position } from './src/position';
 (async function main() {
   const PLANET = new Planet(10);
   const INITIAL_POSITION = new Position(0, 0);
-  const OBSTACLE_POSITION = new Position(1, 10);
+  const OBSTACLE_POSITION = new Position(0, 10);
   const OBSTACLE = new Obstacle(OBSTACLE_POSITION);
   const ROVER = new Rover(INITIAL_POSITION, Orientation.NORTH, PLANET);
   let isRunning = true;
@@ -36,6 +36,16 @@ import { Position } from './src/position';
           break;
       }
       if (ROVER.checkObstacle(OBSTACLE)) {
+        switch (event) {
+          case Event.MOVE_FORWARD:
+            ROVER.moveBackward();
+            break;
+          case Event.MOVE_BACKWARD:
+            ROVER.moveForward();
+            break;
+          default:
+            break;
+        }
         break;
       }
     }
