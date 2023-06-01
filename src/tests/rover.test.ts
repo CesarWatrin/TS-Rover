@@ -49,4 +49,16 @@ describe('rover', () => {
         rover.setPosition(new Position(2, 1));
         expect(rover.getPosition()).toEqual({ x: 2, y: 1});
     });
+
+    it('should cross the map on y', function () {
+        rover.setPosition(new Position(0, 10));
+        rover.moveForward();
+        expect(rover.getPosition()).toEqual({ x: 0, y: -10});
+    });
+
+    it('should cross the map on x', function () {
+        rover.setPosition(new Position(10, 0));
+        rover.moveForward();
+        expect(rover.getPosition()).toEqual({ x: -10, y: 0});
+    });
 });
