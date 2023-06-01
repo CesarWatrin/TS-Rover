@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it} from 'vitest';
+import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {Planet} from "../planet";
 import {Position} from "../position";
 import {Orientation} from "../orientation";
@@ -7,6 +7,8 @@ import {Rover} from "../rover";
 import { Obstacle } from '../obstacle';
 
 const PLANET = new Planet(5);
+const OBSTACLE_POSITION = new Position(0, 3, PLANET);
+const OBSTACLE = new Obstacle(OBSTACLE_POSITION);
 
 let initialPosition = new Position(0, 0, PLANET);
 let initialOrientation = new Orientation(OrientationEnum.NORTH);
@@ -18,6 +20,10 @@ describe('rover', () => {
         initialPosition = new Position(0, 0, PLANET);
         initialOrientation = new Orientation(OrientationEnum.NORTH);
         rover = new Rover(initialOrientation, initialPosition);
+    });
+
+    afterEach(() => {
+        PLANET.removeObstacle();
     });
 
     it('should move forward', function () {
@@ -89,9 +95,7 @@ describe('rover', () => {
     });
 
     it('should stop on obstacle forward on y', function () {
-        let obstaclePosition = new Position(0, 3, PLANET);
-        let obstacle = new Obstacle(obstaclePosition);
-        PLANET.setObstacle(obstacle);
+        PLANET.setObstacle(OBSTACLE);
         for (let i = 0; i < 7; i++) {
             rover.moveForward();
         }
@@ -99,14 +103,10 @@ describe('rover', () => {
     });
 
     it('should stop on obstacle backward on y', function () {
-        let obstaclePosition = new Position(0, 3, PLANET);
-        let obstacle = new Obstacle(obstaclePosition);
-        PLANET.setObstacle(obstacle);
+        PLANET.setObstacle(OBSTACLE);
         for (let i = 0; i < 17; i++) {
             rover.moveBackward();
         }
         expect(rover.toString()).toBe('0:4 - N');
     });
-
-    
 });

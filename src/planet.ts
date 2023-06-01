@@ -2,21 +2,23 @@ import { Obstacle } from './obstacle';
 import { Position } from './position';
 
 export class Planet {
-  constructor(private readonly size: number, private obstacle?: Obstacle) {}
+  private obstacle: Obstacle | undefined;
+
+  constructor(private readonly size: number) {}
 
   public getSize(): number {
     return this.size;
   }
 
-  public setObstacle(obstacle: Obstacle): Obstacle {
-    return (this.obstacle = obstacle);
+  public setObstacle(obstacle: Obstacle) {
+    this.obstacle = obstacle;
   }
 
-  public checkObstacle(position: Position) {
-    if (this.obstacle?.getPosition().toString() === position.toString()) {
-      console.log(this.obstacle?.getPosition());
-      return true;
-    }
-    return false;
+  public removeObstacle() {
+    this.obstacle = undefined;
+  }
+
+  public checkObstacle(position: Position): boolean {
+    return this.obstacle?.getPosition().toString() === position.toString();
   }
 }

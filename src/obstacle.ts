@@ -8,6 +8,6 @@ export class Obstacle {
   }
 
   toString(): string {
-    return `Obstacle rencontré`;
+    return `Obstacle rencontré en ` + this.position.toString();
   }
 }
