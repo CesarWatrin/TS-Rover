@@ -34,16 +34,20 @@ export class Rover {
     return this.position;
   }
 
-  checkPosition(obstacle: Obstacle): void {
+  checkObstacle(obstacle: Obstacle): boolean {
     const obstacleY = obstacle.getPosition().getY();
     const obstacleX = obstacle.getPosition().getX();
     if (
       this.position.getY() === obstacleY &&
       this.position.getX() === obstacleX
     ) {
-      obstacle.toString();
+      console.log(obstacle.toString());
+      return true;
     }
+    return false;
+  }
 
+  checkPosition() {
     switch (this.position.getY()) {
       case this.planet.getSize() + 1: {
         this.position.setY(-this.planet.getSize());
@@ -71,6 +75,7 @@ export class Rover {
       }
     }
     console.log(this.position, this.orientation);
+    return true;
   }
 
   moveForward(): void {
