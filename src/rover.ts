@@ -1,6 +1,5 @@
 import { Orientation } from './orientation';
 import { Position } from "./position";
-import {OrientationEnum} from "./enums/orientation.enum";
 
 export class Rover {
 
@@ -9,15 +8,15 @@ export class Rover {
     private position: Position,
   ) {}
 
-  turnLeft(): void {
+  public turnLeft(): void {
     this.orientation = this.orientation.turnLeft();
   }
 
-  turnRight(): void {
+  public turnRight(): void {
     this.orientation = this.orientation.turnRight();
   }
 
-  moveForward(): void {
+  public moveForward(): void {
     switch (this.orientation.toString()) {
       case Orientation.NORTH.toString():
         this.position = this.position.incrementY();
@@ -33,7 +32,7 @@ export class Rover {
         break
     }
   }
-  moveBackward(): void {
+  public moveBackward(): void {
     switch (this.orientation.toString()) {
       case Orientation.NORTH.toString():
         this.position = this.position.decrementY();
@@ -50,7 +49,7 @@ export class Rover {
     }
   }
 
-  toString(): string {
+  public toString(): string {
     return `${this.position.toString()} - ${this.orientation.toString()}`;
   }
 }
