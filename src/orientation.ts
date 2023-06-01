@@ -10,28 +10,28 @@ export class Orientation {
   ){}
 
   public turnLeft(): Orientation {
-    switch (this) {
-      case Orientation.NORTH:
-        return Orientation.WEST;
-      case Orientation.EAST:
-        return Orientation.NORTH;
-      case Orientation.SOUTH:
-        return Orientation.EAST;
+    switch (this.orientation) {
+      case OrientationEnum.NORTH:
+        return new Orientation(OrientationEnum.WEST);
+      case OrientationEnum.EAST:
+        return new Orientation(OrientationEnum.NORTH);
+      case OrientationEnum.SOUTH:
+        return new Orientation(OrientationEnum.EAST);
       default:
-        return Orientation.SOUTH;
+        return new Orientation(OrientationEnum.SOUTH);
     }
   }
 
   public turnRight(): Orientation {
-    switch (this) {
-      case Orientation.NORTH:
-        return Orientation.EAST;
-      case Orientation.EAST:
-        return Orientation.SOUTH;
-      case Orientation.SOUTH:
-        return Orientation.WEST;
+    switch (this.orientation) {
+      case OrientationEnum.NORTH:
+        return new Orientation(OrientationEnum.EAST);
+      case OrientationEnum.EAST:
+        return new Orientation(OrientationEnum.SOUTH);
+      case OrientationEnum.SOUTH:
+        return new Orientation(OrientationEnum.WEST);
       default:
-        return Orientation.NORTH;
+        return new Orientation(OrientationEnum.NORTH);
     }
   }
 

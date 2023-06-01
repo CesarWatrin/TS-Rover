@@ -9,7 +9,7 @@ export class Position {
   ) {}
 
   incrementX(): Position {
-    if (this.x > this.planet.getSize()) {
+    if (this.x === this.planet.getSize()) {
       return new Position(0, this.y, this.planet);
     }
     return new Position(this.x + 1, this.y, this.planet);
@@ -23,7 +23,7 @@ export class Position {
   }
 
   incrementY(): Position {
-    if (this.y > this.planet.getSize()) {
+    if (this.y === this.planet.getSize()) {
       return new Position(this.x, 0, this.planet);
     }
     return new Position(this.x, this.y + 1, this.planet);
