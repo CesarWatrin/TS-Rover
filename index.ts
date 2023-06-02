@@ -1,10 +1,8 @@
 import { OrientationEnum } from './src/enums/orientation.enum';
-import { Orientation } from "./src/orientation";
-import { Event } from './src/enums/event.enum';
+import { Orientation } from './src/orientation';
 import { Planet } from './src/planet';
 import { Rover } from './src/rover';
-import { prompt } from 'enquirer';
-import { Position } from "./src/position";
+import { Position } from './src/position';
 
 (async function main() {
   const PLANET = new Planet(5);
@@ -12,19 +10,13 @@ import { Position } from "./src/position";
   const INITIAL_ORIENTATION = new Orientation(OrientationEnum.NORTH);
   const ROVER = new Rover(INITIAL_ORIENTATION, INITIAL_POSITION);
 
+  console.log(ROVER.toString()); //expect 0:0 - N
+
+  //all commands
   ROVER.moveForward(); //expect 0:1 - N
-  ROVER.moveForward(); //expect 0:2 - N
-  ROVER.moveForward(); //expect 0:3 - N
-  ROVER.moveForward(); //expect 0:4 - N
-  ROVER.moveForward(); //expect 0:5 - N
-  ROVER.moveForward(); //expect 0:0 - N
+  ROVER.moveBackward(); //expect 0:0 - N
   ROVER.turnRight(); //expect 0:0 - E
-  ROVER.moveForward(); //expect 1:0 - E
-  ROVER.moveForward(); //expect 2:0 - E
-  ROVER.moveForward(); //expect 3:0 - E
-  ROVER.moveForward(); //expect 4:0 - E
-  ROVER.moveForward(); //expect 5:0 - E
-  ROVER.moveForward(); //expect 0:0 - E
+  ROVER.turnLeft(); //expect 0:0 - N
 
   console.log(ROVER.toString());
 })();
