@@ -13,7 +13,6 @@ export class Rover {
   }
 
   public moveForward(): void {
-    console.log(this.orientation);
     switch (this.orientation.toString()) {
       case Orientation.NORTH.toString():
         this.position = this.position.incrementY();

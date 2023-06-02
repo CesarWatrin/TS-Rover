@@ -22,8 +22,10 @@ export class Action {
           break;
         case Event.TURN_LEFT:
           this.rover.turnLeft();
+          break;
         case Event.TURN_RIGHT:
           this.rover.turnRight();
+          break;
         default:
           break;
       }
