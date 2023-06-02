@@ -1,6 +1,5 @@
 import { Orientation } from './orientation';
 import { Position } from './position';
-import { Obstacle } from './obstacle';
 
 export class Rover {
   constructor(private orientation: Orientation, private position: Position) {}
@@ -14,6 +13,7 @@ export class Rover {
   }
 
   public moveForward(): void {
+    console.log(this.orientation);
     switch (this.orientation.toString()) {
       case Orientation.NORTH.toString():
         this.position = this.position.incrementY();
