@@ -6,7 +6,7 @@ import { OrientationEnum } from '../enums/orientation.enum';
 import { Rover } from '../rover';
 import { Action } from '../action';
 import { Event } from '../enums/event.enum';
-import { Obstacle } from "../obstacle";
+import { Obstacle } from '../obstacle';
 
 const PLANET = new Planet(5);
 const OBSTACLE_POSITION = new Position(0, 3, PLANET);
@@ -79,9 +79,19 @@ describe('action', () => {
       Event.MOVE_BACKWARD,
       Event.TURN_LEFT,
       Event.MOVE_BACKWARD,
-      Event.MOVE_BACKWARD
+      Event.MOVE_BACKWARD,
     ]);
     action.runEvents();
     expect(rover.toString()).toBe('2:0 - W');
+  });
+
+  it('should only run events until obstacle', function () {
+    PLANET.setObstacle(OBSTACLE);
+    for (let i = 0; i < 7; i++) {
+      action.addEvent(Event.MOVE_BACKWARD);
+    }
+    const numberOfActionsExecuted = action.runEvents();
+    expect(rover.toString()).toBe('0:4 - N');
+    expect(numberOfActionsExecuted).toEqual(2);
   });
 });

@@ -2,6 +2,7 @@ import { Rover } from './rover';
 import { Event } from './enums/event.enum';
 
 export class Action {
+  private eventCount: number = 0;
   constructor(private readonly rover: Rover, private events: Event[] = []) {}
 
   public addEvent(event: Event): void {
@@ -11,14 +12,15 @@ export class Action {
     this.events = [];
   }
 
-  public runEvents(): void {
+  public runEvents(): number {
+    let stopLoop = false;
     for (const event of this.events) {
       switch (event) {
         case Event.MOVE_FORWARD:
-          this.rover.moveForward();
+          stopLoop = this.rover.moveForward();
           break;
         case Event.MOVE_BACKWARD:
-          this.rover.moveBackward();
+          stopLoop = this.rover.moveBackward();
           break;
         case Event.TURN_LEFT:
           this.rover.turnLeft();
@@ -29,6 +31,12 @@ export class Action {
         default:
           break;
       }
+      if (stopLoop) {
+        this.clear();
+        break;
+      }
+      this.eventCount++;
     }
+    return this.eventCount;
   }
 }
