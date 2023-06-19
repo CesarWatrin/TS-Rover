@@ -14,38 +14,12 @@ export class Rover {
 
   public moveForward(): boolean {
     const originalPosition = this.position;
-    switch (this.orientation.toString()) {
-      case Orientation.NORTH.toString():
-        this.position = this.position.incrementY();
-        break;
-      case Orientation.EAST.toString():
-        this.position = this.position.incrementX();
-        break;
-      case Orientation.SOUTH.toString():
-        this.position = this.position.decrementY();
-        break;
-      default:
-        this.position = this.position.decrementX();
-        break;
-    }
-    return originalPosition.toString() === this.position.toString();
+    this.position = this.position.withForward(this.orientation);
+    return this.position.toString() === originalPosition.toString();
   }
   public moveBackward(): boolean {
     const originalPosition = this.position;
-    switch (this.orientation.toString()) {
-      case Orientation.NORTH.toString():
-        this.position = this.position.decrementY();
-        break;
-      case Orientation.EAST.toString():
-        this.position = this.position.decrementX();
-        break;
-      case Orientation.SOUTH.toString():
-        this.position = this.position.incrementY();
-        break;
-      default:
-        this.position = this.position.incrementX();
-        break;
-    }
+    this.position = this.position.withBackward(this.orientation);
     return originalPosition.toString() === this.position.toString();
   }
 

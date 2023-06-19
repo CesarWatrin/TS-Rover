@@ -1,3 +1,4 @@
+import { Orientation } from './orientation';
 import { Planet } from './planet';
 
 export class Position {
@@ -6,6 +7,32 @@ export class Position {
     private readonly y: number,
     private readonly planet: Planet
   ) {}
+
+  public withForward(orientation: Orientation) {
+    switch (orientation.toString()) {
+      case Orientation.NORTH.toString():
+        return this.incrementY();
+      case Orientation.EAST.toString():
+        return this.incrementX();
+      case Orientation.SOUTH.toString():
+        return this.decrementY();
+      default:
+        return this.decrementX();
+    }
+  }
+
+  public withBackward(orientation: Orientation) {
+    switch (orientation.toString()) {
+      case Orientation.NORTH.toString():
+        return this.decrementY();
+      case Orientation.EAST.toString():
+        return this.decrementX();
+      case Orientation.SOUTH.toString():
+        return this.incrementY();
+      default:
+        return this.incrementX();
+    }
+  }
 
   public incrementX(): Position {
     let newPosition = new Position(this.x + 1, this.y, this.planet);
